@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#7d5039" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <title>食事ログPWA</title>
+    <meta
+      name="description"
+      content="食事内容をすばやく記録し、メール作成画面から Gmail へ送るための食事ログPWAです。"
+    />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="content-grid">
+        <section class="card form-panel" aria-labelledby="form-title">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Input</p>
+              <h2 id="form-title">食事ログ入力</h2>
+            </div>
+          </div>
+
+          <form id="meal-form">
+            <div class="field-grid">
+              <label class="field field-wide">
+                <span class="field-label">送信先メールアドレス</span>
+                <input
+                  id="recipient-email"
+                  name="recipientEmail"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="example@gmail.com"
+                  required
+                />
+              </label>
+
+              <label class="field">
+                <span class="field-label">日時</span>
+                <input id="datetime" name="datetime" type="datetime-local" required />
+              </label>
+
+              <label class="field">
+                <span class="field-label">食事区分</span>
+                <select id="meal-type" name="mealType" required>
+                  <option value="">選択してください</option>
+                  <option value="朝食">朝食</option>
+                  <option value="昼食">昼食</option>
+                  <option value="夕食">夕食</option>
+                  <option value="夜食">夜食</option>
+                  <option value="間食/飲み物">間食/飲み物</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span class="field-label">食事場所</span>
+                <select id="place-type" name="placeType" required>
+                  <option value="">選択してください</option>
+                  <option value="自炊">自炊</option>
+                  <option value="外食">外食</option>
+                  <option value="スーパー/コンビニ">スーパー/コンビニ</option>
+                  <option value="テイクアウト">テイクアウト</option>
+                  <option value="その他">その他</option>
+                </select>
+              </label>
+            </div>
+
+            <section class="items-panel" aria-labelledby="items-title">
+              <div class="items-head">
+                <div>
+                  <p class="section-kicker">Items</p>
+                  <h3 id="items-title">食品入力</h3>
+                </div>
+                <button id="add-item-button" class="tertiary" type="button">＋ 食品欄を追加</button>
+              </div>
+              <div id="items-container" class="items-list"></div>
+              <p class="field-hint">初期3行、最大10行です。空欄は送信時に除外します。</p>
+            </section>
+
+            <label class="field field-wide">
+              <span class="field-label">メモ</span>
+              <textarea
+                id="memo"
+                name="memo"
+                rows="4"
+                placeholder="大盛、夜勤明け、食べすぎ など"
+              ></textarea>
+            </label>
+
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+
+            <div class="form-actions">
+              <button class="primary" type="submit">メール作成画面を開く</button>
+              <button id="clear-button" class="ghost" type="button">入力をクリア</button>
+            </div>
+          </form>
+        </section>
+
+        <aside class="card recent-panel" aria-labelledby="recent-title">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Recent</p>
+              <h2 id="recent-title">直近履歴</h2>
+            </div>
+            <p class="section-note">最新5件を保存し、タップでフォームに戻せます。</p>
+          </div>
+
+          <p id="recent-empty" class="empty-state">まだ履歴はありません。送信するとここに蓄積されます。</p>
+          <ul id="recent-list" class="recent-list" aria-live="polite"></ul>
+        </aside>
+      </div>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

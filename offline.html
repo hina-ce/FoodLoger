@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#7d5039" />
+    <title>オフラインです | 食事ログPWA</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+        color: #2d241f;
+        background:
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.88), transparent 30%),
+          linear-gradient(135deg, #f7efe4, #f2dcc6 56%, #d8e4d7);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+      }
+
+      main {
+        width: min(560px, 100%);
+        padding: 32px;
+        border-radius: 30px;
+        background: rgba(255, 251, 246, 0.94);
+        border: 1px solid rgba(125, 80, 57, 0.12);
+        box-shadow: 0 24px 70px rgba(72, 42, 26, 0.12);
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-size: clamp(1.9rem, 5vw, 2.8rem);
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.85;
+        color: #6f6257;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 999px;
+        text-decoration: none;
+      }
+
+      .primary {
+        color: #fffaf4;
+        background: linear-gradient(135deg, #7d5039, #5d3724);
+      }
+
+      .secondary {
+        color: #5d3724;
+        background: rgba(255, 248, 241, 0.92);
+        border: 1px solid rgba(125, 80, 57, 0.12);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>いまはオフラインです</h1>
+      <p>
+        ネットワークに接続できないため、最新の画面を取得できませんでした。
+        接続が戻れば、保存済みの下書きを使ってそのまま入力を続けられます。
+      </p>
+      <div class="actions">
+        <a class="primary" href="./index.html">アプリへ戻る</a>
+        <a class="secondary" href="./manifest.webmanifest">Manifestを見る</a>
+      </div>
+    </main>
+  </body>
+</html>
