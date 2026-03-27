@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "食事ログPWA",
-  "short_name": "食事ログ",
-  "description": "食事内容を記録し、メール作成画面から CSV として送るための食事ログPWA。",
+  "name": "FoodLoger",
+  "short_name": "FoodLoger",
+  "description": "FoodLoger は、食事内容を記録し、メール作成画面から CSV として送るための PWA です。",
   "lang": "ja-JP",
   "start_url": "./index.html",
   "scope": "./",
