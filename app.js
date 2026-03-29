@@ -135,10 +135,13 @@ function normalizeItems(items) {
   return nextItems;
 }
 
-function normalizeDraft(draft) {
+function normalizeDraft(draft, options = {}) {
   const nextDraft = draft ?? {};
+  const hasDatetime = Object.prototype.hasOwnProperty.call(nextDraft, "datetime");
+  const defaultDatetime = options.defaultDatetime ?? getNowInputValue();
+
   return {
-    datetime: sanitizeString(nextDraft.datetime) || getNowInputValue(),
+    datetime: hasDatetime ? sanitizeString(nextDraft.datetime) : defaultDatetime,
     mealType: normalizeMealType(nextDraft.mealType),
     placeType: normalizePlaceType(nextDraft.placeType),
     items: normalizeItems(nextDraft.items),
@@ -342,6 +345,18 @@ function resetDraft() {
   saveStore();
 }
 
+function clearDraftAfterMailCompose() {
+  currentDraft = normalizeDraft({
+    datetime: "",
+    mealType: "",
+    placeType: "",
+    items: currentDraft.items.map(() => ""),
+    memo: currentDraft.memo
+  });
+  applyDraftToForm();
+  saveStore();
+}
+
 function buildMailtoUrl(recipient, record) {
   const subject = "meal-log-export";
   const body = buildCsvBody(record);
@@ -440,9 +455,9 @@ form.addEventListener("submit", (event) => {
 
   const record = createRecordForMail();
   registerRecentEntry(record);
-  saveStore();
 
   const mailtoUrl = buildMailtoUrl(recipientEmailInput.value.trim(), record);
+  clearDraftAfterMailCompose();
   window.location.href = mailtoUrl;
   setFormMessage("メール作成画面を開きました。内容を確認して送信してください。", "is-success");
 });
