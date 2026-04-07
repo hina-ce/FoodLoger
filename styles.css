@@ -183,6 +183,11 @@ textarea {
   margin-top: 24px;
 }
 
+.form-utility-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .field-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -419,6 +424,10 @@ input[type="datetime-local"] {
   }
 
   .form-actions > * {
+    width: 100%;
+  }
+
+  .form-utility-actions > * {
     width: 100%;
   }
 }
